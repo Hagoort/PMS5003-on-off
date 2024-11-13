@@ -60,10 +60,14 @@ def read_pms5003():
             pm1 = (response[4] << 8) + response[5]
             pm25 = (response[6] << 8) + response[7]
             pm10 = (response[8] << 8) + response[9]
+            #temperature = ((response[16] << 8) + response[17]) / 10.0  # Celsius (reserved or unused but possibly internal temperature)
+            #humidity = ((response[18] << 8) + response[19]) / 10.0  # Percent (reserved or unused but possibly humidity)
             
             print(f"PM1.0: {pm1} µg/m³")
             print(f"PM2.5: {pm25} µg/m³")
             print(f"PM10: {pm10} µg/m³")
+            #print(f"Temperature: {temperature} °C") # Internal temperature of the sensor and not the ambient temperature
+            #print(f"Humidity: {humidity} %")
         else:
             print("Error: Invalid response length or corrupted data")
 
