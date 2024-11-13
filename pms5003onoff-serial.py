@@ -97,7 +97,7 @@ try:
             readings_count += 1  # Increment the readings count
             logging.info(f"Reading {readings_count}")  # Log the number of readings taken
             read_pms5003()  # Read the sensor
-            time.sleep(1)
+            #time.sleep(1)
             
         # Turn off PMS5003 including its fan
         power_off_pms5003()       
