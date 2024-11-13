@@ -22,7 +22,7 @@ Press Ctrl+C to exit!
 """)
 
 # Initialize PMS5003 and UART for controlling power state
-pms5003 = serial.Serial('/dev/ttyAMA0', baudrate=9600, timeout=1)  # Set the correct UART port if different
+pms5003 = serial.Serial('/dev/ttyAMA0', baudrate=9600, timeout=1)  # Set the correct port if different
 
 # Power on, off, reset and read functions for PMS5003
 def power_on_pms5003():
@@ -31,7 +31,7 @@ def power_on_pms5003():
     
     time.sleep(3)  # Sensor needs some time to turn on
         
-    pms5003.reset_input_buffer()  # Clear the UART buffer to remove any residual data
+    pms5003.reset_input_buffer()  # Clear the buffer to remove any residual data
     logging.info("Clear UART buffer to remove any residual data.")
     
     #time.sleep(1)
@@ -90,14 +90,14 @@ def countdown_sleep(seconds):
 
 try:
     while True:
-        # Turn on PMS5003 and take readings for 30 seconds
+        # Turn on PMS5003 and take readings for x-seconds
         power_on_pms5003()
         
         # Initialize the reading counter
         readings_count = 0
         
         # Take x number of readings in a loop with 1-second interval between each reading
-        for _ in range(100):  # Take x number of readings, adjust this based on your needs
+        for _ in range(100):  # Take x-readings, adjust this based on your needs
             readings_count += 1  # Increment the readings count
             logging.info(f"Reading {readings_count}")  # Log the number of readings taken
             read_pms5003()  # Read the sensor
@@ -105,7 +105,7 @@ try:
             
         # Turn off PMS5003 including its fan
         power_off_pms5003()       
-        countdown_sleep(60)
+        countdown_sleep(60)  # Wait x-seconds before taking readings again
         
 except KeyboardInterrupt:
     logging.info("Script terminated by user.")
